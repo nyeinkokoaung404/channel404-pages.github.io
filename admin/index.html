@@ -3366,32 +3366,36 @@ function confirmCloudflareConfig() {
 
 // 保存通知设置
 async function saveNotification() {
-    // 将通知配置保存到 currentConfig
-    currentConfig.通知 = {
-        Telegram: {
-            BotToken: document.getElementById('telegramBotToken').value || '',
-            ChatID: document.getElementById('telegramChatID').value || ''
-        },
-        Cloudflare: currentConfig.通知?.Cloudflare || {}
-    };
-    
-    // 如果启用了TelegramBot，确保相关配置不为空
-    if (document.getElementById('telegramEnabled').checked) {
-        if (!document.getElementById('telegramBotToken').value || !document.getElementById('telegramChatID').value) {
-            showToast('请先配置TelegramBot的参数', 'error');
-            return;
-        }
+    try {
+        // 只更新 TG.启用 字段
+        if (!currentConfig.TG) currentConfig.TG = {};
+        currentConfig.TG.启用 = document.getElementById('telegramEnabled').checked;
+        
+        // 提交到服务器，但整个 currentConfig
+        const response = await fetch('/admin/config.json', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(currentConfig)
+        });
+        
+        if (!response.ok) throw new Error('保存失败');
+        
+        showToast('✅ 启用状态已保存', 'success');
+        modifiedSections.delete('notification');
+        updateButtonStates();
+    } catch (error) {
+        showToast('❌ 保存失败: ' + error.message, 'error');
     }
-    
-    await saveConfigToServer('notification');
 }
 
 // 取消通知设置编辑
 function cancelEdit(section) {
     if (section === 'notification') {
-        // 重置通知模块的所有输入
-        document.getElementById('telegramEnabled').checked = currentConfig.通知?.Telegram?.BotToken ? true : false;
-        currentConfig = JSON.parse(JSON.stringify(originalConfig));
+        // 重置通知启用状态为原始值
+        const telegramCheckbox = document.getElementById('telegramEnabled');
+        const originalEnabled = originalConfig.TG?.启用 ?? false;
+        telegramCheckbox.checked = originalEnabled;
+        currentConfig.TG.启用 = originalEnabled;
     } else {
         // 原有的cancelEdit逻辑
         currentConfig = JSON.parse(JSON.stringify(originalConfig));
