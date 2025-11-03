@@ -1617,7 +1617,7 @@ html.dark-mode .moon-icon {
 
                 <div id="generatorSection" class="form-group hidden-section">
                     <label for="generatorURL">优选订阅生成器</label>
-                    <input type="text" id="generatorURL" title="优选订阅生成器" placeholder="sub.cmliussss.net" onchange="markModified('sub')">
+                    <input type="text" id="generatorURL" title="优选订阅生成器" placeholder="sub.cmliussss.net" onchange="processGeneratorURL()" oninput="processGeneratorURL()">
                 </div>
 
                 <div class="module-footer">
@@ -2053,6 +2053,71 @@ function updateIPMode() {
     markModified('sub');
 }
 
+// 处理优选订阅生成器URL
+function processGeneratorURL() {
+    const input = document.getElementById('generatorURL').value.trim();
+    let domain = '';
+    
+    if (input) {
+        // 如果输入不是空的，提取域名
+        domain = extractDomain(input);
+        document.getElementById('generatorURL').value = domain;
+    }
+    
+    markModified('sub');
+}
+
+// 提取URL中的纯域名
+function extractDomain(url) {
+    try {
+        url = url.trim();
+        
+        // 如果不包含协议，尝试识别是否为完整URL或纯域名
+        if (!url.includes('://')) {
+            // 检查是否包含路径、查询参数或端口
+            if (url.includes('/') || url.includes('?') || url.includes(':')) {
+                // 这是一个完整的URL，补充https协议
+                url = 'https://' + url;
+            } else {
+                // 这是纯域名，直接返回
+                return url;
+            }
+        }
+        
+        // 解析URL
+        const urlObj = new URL(url);
+        
+        // 获取hostname（不包含端口）
+        let domain = urlObj.hostname;
+        
+        // 移除www前缀（如果有）
+        if (domain.startsWith('www.')) {
+            domain = domain.substring(4);
+        }
+        
+        return domain;
+    } catch (error) {
+        // 如果URL解析失败，返回原始输入去掉协议部分的结果
+        let temp = url.trim();
+        if (temp.includes('://')) {
+            temp = temp.split('://')[1];
+        }
+        if (temp.includes('/')) {
+            temp = temp.split('/')[0];
+        }
+        if (temp.includes('?')) {
+            temp = temp.split('?')[0];
+        }
+        if (temp.includes(':')) {
+            temp = temp.split(':')[0];
+        }
+        if (temp.startsWith('www.')) {
+            temp = temp.substring(4);
+        }
+        return temp;
+    }
+}
+
 function updateProtocol() {
     const protocol = document.getElementById('protocol').value;
     /*
@@ -2219,6 +2284,28 @@ function closeQRCode(event) {
 
 async function saveSub() {
     const mode = document.getElementById('ipMode').value;
+    
+    // 检查文本框内容是否为空
+    if (mode === 'random') {
+        const randomCount = document.getElementById('randomCount').value.trim();
+        if (!randomCount) {
+            showToast('随机优选数量不能为空', 'error');
+            return;
+        }
+    } else if (mode === 'custom') {
+        const customIPs = document.getElementById('customIPs').value.trim();
+        if (!customIPs) {
+            showToast('自定义优选地址不能为空', 'error');
+            return;
+        }
+    } else if (mode === 'generator') {
+        const generatorURL = document.getElementById('generatorURL').value.trim();
+        if (!generatorURL) {
+            showToast('优选订阅生成器地址不能为空', 'error');
+            return;
+        }
+    }
+    
     const updates = {
         local: mode !== 'generator',
         本地IP库: { 随机IP: mode === 'random', 随机数量: parseInt(document.getElementById('randomCount').value) || 16 },
