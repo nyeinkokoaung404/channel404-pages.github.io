@@ -4682,7 +4682,7 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
             navigator.clipboard.writeText(element.value).then(() => {
                 showToast('Copied to clipboard', 'success');
             }).catch(() => {
-                showToast('复制失败', 'error');
+                showToast('Copy failed', 'error');
             });
         }
 
@@ -4909,7 +4909,7 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
             document.querySelectorAll('.module').forEach((module, index) => {
                 const title = module.querySelector('.module-title')?.textContent?.trim() || ('module-' + index);
                 // 不保存"查看操作日志"和"当前网络信息"模块的状态
-                if (title !== '📋 查看操作日志' && title !== '🌍 当前网络信息') {
+                if (title !== '📋 View operation log' && title !== '🌍 Current network information') {
                     states[title] = !module.classList.contains('collapsed');
                 }
             });
@@ -4929,9 +4929,9 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
                 let shouldBeExpanded;
 
                 // "查看操作日志"模块始终保持折叠状态，"当前网络信息"模块始终展开
-                if (title === '📋 查看操作日志') {
+                if (title === '📋 View operation log') {
                     shouldBeExpanded = false;
-                } else if (title === '🌍 当前网络信息') {
+                } else if (title === '🌍 Current network information') {
                     shouldBeExpanded = true;
                 } else {
                     shouldBeExpanded = isFirstVisit ? false : (states[title] !== false); // 第一次默认折叠，之后按保存的状态
@@ -4978,17 +4978,17 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
         async function confirmReset() {
             try {
                 const response = await fetch('/admin/init');
-                if (!response.ok) throw new Error('重置失败');
+                if (!response.ok) throw new Error('Reset failed');
 
                 closeResetModal();
-                showToast('配置已重置为默认值', 'success');
+                showToast('The configuration has been reset to the default value', 'success');
 
                 // 延迟1秒后刷新页面，让用户看到成功提示
                 setTimeout(() => {
                     window.location.reload();
                 }, 1000);
             } catch (error) {
-                showToast('重置失败: ' + error.message, 'error');
+                showToast('Reset failed: ' + error.message, 'error');
             }
         }
 
@@ -5025,9 +5025,9 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
             if (type === 'Get_SUB') {
                 const uaLowercase = (ua || '').toLowerCase();
                 if (uaLowercase.includes('subconverter')) {
-                    return { text: '订阅转换', color: '#3b82f6' };
+                    return { text: 'Subscription Conversion', color: '#3b82f6' };
                 }
-                return { text: '获取订阅', color: '#10b981' };
+                return { text: 'Get Subscription', color: '#10b981' };
             }
 
             const typeMap = {
@@ -5140,7 +5140,7 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
 
                 const container = document.getElementById('allLogsContainer');
                 let html = '<table style="width: 100%; border-collapse: collapse; font-size: 12px; table-layout: auto;">';
-                html += '<thead><tr style="border-bottom: 2px solid #e5e7eb; background: #f9fafb; white-space: nowrap;"><th style="text-align: left; padding: 10px; font-weight: 600; width: 160px;">时间 (UTC+8)</th><th style="text-align: left; padding: 10px; font-weight: 600; width: 120px;">IP</th><th style="text-align: left; padding: 10px; font-weight: 600; width: 80px;">地区</th><th style="text-align: left; padding: 10px; font-weight: 600; width: 80px;">ASN</th><th style="text-align: left; padding: 10px; font-weight: 600; width: 150px;">操作</th><th style="text-align: left; padding: 10px; font-weight: 600; flex: 1; min-width: 300px;">URL</th><th style="text-align: left; padding: 10px; font-weight: 600; flex: 1; min-width: 200px;">UA</th></tr></thead>';
+                html += '<thead><tr style="border-bottom: 2px solid #e5e7eb; background: #f9fafb; white-space: nowrap;"><th style="text-align: left; padding: 10px; font-weight: 600; width: 160px;">Time (UTC+8)</th><th style="text-align: left; padding: 10px; font-weight: 600; width: 120px;">IP</th><th style="text-align: left; padding: 10px; font-weight: 600; width: 80px;">Region</th><th style="text-align: left; padding: 10px; font-weight: 600; width: 80px;">ASN</th><th style="text-align: left; padding: 10px; font-weight: 600; width: 150px;">Operate</th><th style="text-align: left; padding: 10px; font-weight: 600; flex: 1; min-width: 300px;">URL</th><th style="text-align: left; padding: 10px; font-weight: 600; flex: 1; min-width: 200px;">UA</th></tr></thead>';
                 html += '<tbody>';
 
                 sortedLogs.forEach(log => {
@@ -5159,7 +5159,7 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
                 container.innerHTML = html;
                 document.getElementById('logsModal').classList.add('show');
             } catch (error) {
-                showToast('加载日志失败: ' + error.message, 'error');
+                showToast('Log loading failed: ' + error.message, 'error');
             }
         }
 
@@ -5235,13 +5235,13 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
         async function testSubAPI() {
             const input = document.getElementById('testSubAPIInput').value.trim();
             if (!input) {
-                showStatus('请输入地址', 'error');
+                showStatus('Please enter the address', 'error');
                 return;
             }
 
             const baseURL = normalizeSubAPIURL(input);
             if (!baseURL) {
-                showStatus('地址格式无效', 'error');
+                showStatus('Invalid address format', 'error');
                 return;
             }
 
@@ -5252,7 +5252,7 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
 
             try {
                 testBtn.disabled = true;
-                statusEl.textContent = '⏳ 检测中...';
+                statusEl.textContent = '⏳ During testing...';
                 statusEl.style.display = 'block';
                 statusEl.style.background = 'linear-gradient(135deg, #3b82f6 0, #1d4ed8 100%)';
                 statusEl.style.color = '#fff';
@@ -5273,19 +5273,19 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
                         document.getElementById('subAPIConfirmBtn').dataset.validURL = baseURL;
                     } else {
                         statusEl.style.background = 'linear-gradient(135deg, #ef4444 0, #dc2626 100%)';
-                        statusEl.textContent = '❌ 响应内容无效';
+                        statusEl.textContent = '❌ Invalid response content';
                         document.getElementById('subAPIConfirmBtn').disabled = true;
                         document.getElementById('subAPIConfirmBtn').style.opacity = '0.5';
                     }
                 } else {
                     statusEl.style.background = 'linear-gradient(135deg, #ef4444 0, #dc2626 100%)';
-                    statusEl.textContent = '❌ 请求失败 (HTTP ' + response.status + ')';
+                    statusEl.textContent = '❌ Request failed (HTTP ' + response.status + ')';
                     document.getElementById('subAPIConfirmBtn').disabled = true;
                     document.getElementById('subAPIConfirmBtn').style.opacity = '0.5';
                 }
             } catch (error) {
                 statusEl.style.background = 'linear-gradient(135deg, #ef4444 0, #dc2626 100%)';
-                statusEl.textContent = '❌ 检测失败: ' + error.message;
+                statusEl.textContent = '❌ Request failed: ' + error.message;
                 document.getElementById('subAPIConfirmBtn').disabled = true;
                 document.getElementById('subAPIConfirmBtn').style.opacity = '0.5';
             } finally {
@@ -7106,7 +7106,7 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
                         spinner.remove();
 
                         // 显示错误提示
-                        showToast('❌ 查询IP详细信息失败');
+                        showToast('❌ Querying IP details failed');
                         console.error('IP查询错误:', error);
                     }
                 });
@@ -7542,28 +7542,28 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
             if (data.abuse) {
                 detailHTML += `
                     <div class="ip-detail-section">
-                        <div class="ip-detail-section-title">📧 滥用举报联系方式</div>
+                        <div class="ip-detail-section-title">📧 Misuse of reporting contact information</div>
                         ${data.abuse.name ? `
                         <div class="ip-detail-item">
-                            <span class="ip-detail-label">联系人</span>
+                            <span class="ip-detail-label">Contact Person</span>
                             <span class="ip-detail-value">${data.abuse.name}</span>
                         </div>
                         ` : ''}
                         ${data.abuse.email ? `
                         <div class="ip-detail-item">
-                            <span class="ip-detail-label">邮箱</span>
+                            <span class="ip-detail-label">Mail</span>
                             <span class="ip-detail-value">${data.abuse.email}</span>
                         </div>
                         ` : ''}
                         ${data.abuse.phone ? `
                         <div class="ip-detail-item">
-                            <span class="ip-detail-label">电话</span>
+                            <span class="ip-detail-label">Telephone</span>
                             <span class="ip-detail-value">${data.abuse.phone}</span>
                         </div>
                         ` : ''}
                         ${data.abuse.address ? `
                         <div class="ip-detail-item">
-                            <span class="ip-detail-label">地址</span>
+                            <span class="ip-detail-label">Address</span>
                             <span class="ip-detail-value">${data.abuse.address}</span>
                         </div>
                         ` : ''}
