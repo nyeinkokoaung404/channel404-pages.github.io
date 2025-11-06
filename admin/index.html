@@ -4963,7 +4963,7 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
         async function refreshConfig() {
             await loadConfig();
             const loadTime = currentConfig.加载时间 || '未知';
-            showToast(`配置已刷新 (加载时间: ${loadTime})`, 'success');
+            showToast(`Configuration has been refreshed (Loading time: ${loadTime})`, 'success');
         }
 
         function resetConfigWithConfirm() {
@@ -5031,10 +5031,10 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
             }
 
             const typeMap = {
-                'Admin_Login': { text: '登录后台', color: '#f59e0b' },
-                'Save_Config': { text: '保存配置', color: '#8b5cf6' },
-                'Init_Config': { text: '重置配置', color: '#ef4444' },
-                'Save_Custom_IPs': { text: '自定义优选', color: '#06b6d4' }
+                'Admin_Login': { text: 'Log in to the backend', color: '#f59e0b' },
+                'Save_Config': { text: 'Save configuration', color: '#8b5cf6' },
+                'Init_Config': { text: 'Reset configuration', color: '#ef4444' },
+                'Save_Custom_IPs': { text: 'Customized Preferred', color: '#06b6d4' }
             };
             return typeMap[type] || { text: type, color: '#6b7280' };
         }
@@ -5092,10 +5092,10 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
                 let html = '<table style="width: 100%; border-collapse: collapse;">';
                 if (isMobile) {
                     // 移动设备：显示时间、IP、操作
-                    html += '<thead><tr style="border-bottom: 2px solid #e5e7eb;"><th style="text-align: left; padding: 10px; font-weight: 600;">时间 (UTC+8)</th><th style="text-align: left; padding: 10px; font-weight: 600;">IP</th><th style="text-align: left; padding: 10px; font-weight: 600;">操作</th></tr></thead>';
+                    html += '<thead><tr style="border-bottom: 2px solid #e5e7eb;"><th style="text-align: left; padding: 10px; font-weight: 600;">Time (UTC+8)</th><th style="text-align: left; padding: 10px; font-weight: 600;">IP</th><th style="text-align: left; padding: 10px; font-weight: 600;">Operate</th></tr></thead>';
                 } else {
                     // 桌面设备：显示时间、IP、地区、操作
-                    html += '<thead><tr style="border-bottom: 2px solid #e5e7eb;"><th style="text-align: left; padding: 10px; font-weight: 600;">时间 (UTC+8)</th><th style="text-align: left; padding: 10px; font-weight: 600;">IP</th><th style="text-align: left; padding: 10px; font-weight: 600;">地区</th><th style="text-align: left; padding: 10px; font-weight: 600;">操作</th></tr></thead>';
+                    html += '<thead><tr style="border-bottom: 2px solid #e5e7eb;"><th style="text-align: left; padding: 10px; font-weight: 600;">Time (UTC+8)</th><th style="text-align: left; padding: 10px; font-weight: 600;">IP</th><th style="text-align: left; padding: 10px; font-weight: 600;">Region</th><th style="text-align: left; padding: 10px; font-weight: 600;">Operate</th></tr></thead>';
                 }
                 html += '<tbody>';
 
