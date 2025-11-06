@@ -3134,7 +3134,7 @@
 
             <div class="header">
                 <div class="header-title">
-                    <h1 id="pageTitle">加载中...</h1>
+                    <h1 id="pageTitle">Loading...</h1>
                 </div>
                 <div class="header-buttons">
                     <button type="button" class="btn btn-danger btn-reset"
@@ -3146,7 +3146,7 @@
             <!-- Cloudflare Workers/Pages 使用统计模块 -->
             <div class="module cf-usage-module collapsed" id="cfUsageModule">
                 <div class="module-title" onclick="toggleModule(this)">
-                    Workers/Pages 请求使用情况
+                    Workers/Pages Request Usage
                     <svg class="collapse-icon" viewBox="0 0 24 24">
                         <path d="M7 10l5 5 5-5z" />
                     </svg>
@@ -3326,7 +3326,7 @@
             <!-- 模块2: 编辑订阅生成 -->
             <div class="module collapsed">
                 <div class="module-title" onclick="toggleModule(this)">
-                    ⚡️ 优选订阅生成
+                    ⚡️ Optimized Subscription Generation
                     <svg class="collapse-icon" viewBox="0 0 24 24">
                         <path d="M7 10l5 5 5-5z" />
                     </svg>
@@ -3334,53 +3334,53 @@
                 <div class="module-content">
 
                     <div class="form-group">
-                        <label for="ipMode">优选订阅模式</label>
-                        <select id="ipMode" title="优选订阅模式" onchange="updateIPMode()">
-                            <option value="random">随机优选</option>
-                            <option value="custom">自定义优选</option>
-                            <option value="generator">优选订阅生成器</option>
+                        <label for="ipMode">Optimized Subscription Mode</label>
+                        <select id="ipMode" title="Optimized Subscription Mode" onchange="updateIPMode()">
+                            <option value="random">Random Optimization</option>
+                            <option value="custom">Custom Optimization</option>
+                            <option value="generator">Optimized Subscription Generator</option>
                         </select>
                     </div>
 
                     <div id="randomIPSection" class="form-group">
-                        <label for="randomCount">随机优选数量</label>
-                        <input type="number" id="randomCount" title="随机优选数量" min="1" max="999" value="16"
+                        <label for="randomCount">Random Optimization Count</label>
+                        <input type="number" id="randomCount" title="Random Optimization Count" min="1" max="999" value="16"
                             onchange="markModified('sub')">
                     </div>
 
                     <div id="customIPSection" class="form-group hidden-section">
-                        <label for="customIPs">自定义优选地址</label>
-                        <textarea id="customIPs" title="自定义优选地址" placeholder="注意：
-每行一个地址，如：地址:端口#备注
-IPv6地址需要用中括号括起来，如：[2606:4700::]:2053
-端口不写，默认为 443 端口，如：www.visa.cn#优选域名
+                        <label for="customIPs">Custom Optimized Addresses</label>
+                        <textarea id="customIPs" title="Custom Optimized Addresses" placeholder="Note:
+One address per line, e.g.: address:port#remark
+IPv6 addresses need to be enclosed in brackets, e.g.: [2606:4700::]:2053
+If port is not specified, default is 443, e.g.: www.visa.com#Optimized Domain
 
-示例：
-www.visa.cn#优选域名
+Examples:
+www.visa.com#Optimized Domain
 127.0.0.1:1234#CFnat
 [2606:4700::]:2053#IPv6
 
-API示例：
-https://raw.githubusercontent.com/cmliu/WorkerVless2sub/main/addressesapi.txt"
+API Examples:
+https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addressesapi.txt"
                             onchange="markModified('sub')"></textarea>
                     </div>
 
                     <div id="generatorSection" class="form-group hidden-section">
-                        <label for="generatorURL">优选订阅生成器</label>
-                        <input type="text" id="generatorURL" title="优选订阅生成器" placeholder="sub.cmliussss.net"
+                        <label for="generatorURL">Optimized Subscription Generator</label>
+                        <input type="text" id="generatorURL" title="Optimized Subscription Generator" placeholder="sub.channel404.net"
                             onchange="processGeneratorURL()" oninput="processGeneratorURL()">
                     </div>
 
                     <div class="module-footer">
                         <button type="button" class="btn btn-online-optimize hidden-section" id="onlineOptimizeBtn"
-                            onclick="openOnlineOptimizeModal()">在线优选</button>
+                            onclick="openOnlineOptimizeModal()">Online Optimization</button>
                         <button type="button" class="btn btn-api-optimize hidden-section" id="apiOptimizeBtn"
-                            onclick="openAPIOptimizeModal()">优选API</button>
+                            onclick="openAPIOptimizeModal()">Optimization API</button>
                         <div class="btn-group">
                             <button type="button" class="btn btn-secondary" onclick="cancelEdit('sub')" disabled
-                                id="cancelSubBtn">取消</button>
+                                id="cancelSubBtn">Cancel</button>
                             <button type="button" class="btn btn-primary" onclick="saveSub()" disabled
-                                id="saveSubBtn">保存</button>
+                                id="saveSubBtn">Save</button>
                         </div>
                     </div>
                 </div>
@@ -3389,7 +3389,7 @@ https://raw.githubusercontent.com/cmliu/WorkerVless2sub/main/addressesapi.txt"
             <!-- 模块3: 详细配置信息 -->
             <div class="module collapsed">
                 <div class="module-title" onclick="toggleModule(this)">
-                    ⚙️ 详细配置信息
+                    ⚙️ Detailed Configuration Information
                     <svg class="collapse-icon" viewBox="0 0 24 24">
                         <path d="M7 10l5 5 5-5z" />
                     </svg>
@@ -3398,12 +3398,12 @@ https://raw.githubusercontent.com/cmliu/WorkerVless2sub/main/addressesapi.txt"
 
                     <div class="form-group">
                         <label for="subName">订阅名称</label>
-                        <input type="text" id="subName" title="订阅名称" onchange="markModified('config')">
+                        <input type="text" id="subName" title="Subscription Name" onchange="markModified('config')">
                     </div>
 
                     <div class="form-group">
                         <label for="nodeHost">节点域名</label>
-                        <input type="text" id="nodeHost" title="节点域名" readonly>
+                        <input type="text" id="nodeHost" title="Node Domain" readonly>
                     </div>
 
                     <div class="form-group">
@@ -3413,7 +3413,7 @@ https://raw.githubusercontent.com/cmliu/WorkerVless2sub/main/addressesapi.txt"
 
                     <div class="form-group">
                         <label for="protocol">节点协议</label>
-                        <select id="protocol" title="节点协议" onchange="updateProtocol(); markModified('config')">
+                        <select id="protocol" title="Node Protocol" onchange="updateProtocol(); markModified('config')">
                             <option value="vless">VLESS</option>
                             <option value="trojan">Trojan</option>
                         </select>
@@ -3428,11 +3428,11 @@ https://raw.githubusercontent.com/cmliu/WorkerVless2sub/main/addressesapi.txt"
                 </div>
                 --->
                     <div class="form-group">
-                        <label for="skipVerify">跳过证书验证</label>
+                        <label for="skipVerify">Skip Certificate Verification</label>
                         <div class="input-wrapper">
                             <div class="checkbox-group">
-                                <input type="checkbox" id="skipVerify" title="跳过证书验证" onchange="markModified('config')">
-                                <label for="skipVerify" class="checkbox-label">启用</label>
+                                <input type="checkbox" id="skipVerify" title="Skip Certificate Verification" onchange="markModified('config')">
+                                <label for="skipVerify" class="checkbox-label">Enable</label>
                             </div>
                         </div>
                     </div>
@@ -3440,9 +3440,9 @@ https://raw.githubusercontent.com/cmliu/WorkerVless2sub/main/addressesapi.txt"
                     <div class="module-footer">
                         <div class="btn-group">
                             <button type="button" class="btn btn-secondary" onclick="cancelEdit('config')" disabled
-                                id="cancelConfigBtn">取消</button>
+                                id="cancelConfigBtn">Cancel</button>
                             <button type="button" class="btn btn-primary" onclick="saveConfig()" disabled
-                                id="saveConfigBtn">保存</button>
+                                id="saveConfigBtn">Save</button>
                         </div>
                     </div>
                 </div>
@@ -3451,7 +3451,7 @@ https://raw.githubusercontent.com/cmliu/WorkerVless2sub/main/addressesapi.txt"
             <!-- 模块4: 反代落地设置 -->
             <div class="module collapsed">
                 <div class="module-title" onclick="toggleModule(this)">
-                    🌐 Cloudflare CDN 访问设置
+                    🌐 Cloudflare CDN Access Settings
                     <svg class="collapse-icon" viewBox="0 0 24 24">
                         <path d="M7 10l5 5 5-5z" />
                     </svg>
@@ -3459,8 +3459,8 @@ https://raw.githubusercontent.com/cmliu/WorkerVless2sub/main/addressesapi.txt"
                 <div class="module-content">
 
                     <div class="form-group">
-                        <label for="proxyMode">反代模式</label>
-                        <select id="proxyMode" title="反代模式" onchange="updateProxyMode()">
+                        <label for="proxyMode">Reverse Proxy Mode</label>
+                        <select id="proxyMode" title="Reverse Proxy Mode" onchange="updateProxyMode()">
                             <option value="auto">PROXYIP</option>
                             <option value="socks5">SOCKS5</option>
                             <option value="http">HTTP</option>
@@ -3471,12 +3471,12 @@ https://raw.githubusercontent.com/cmliu/WorkerVless2sub/main/addressesapi.txt"
                         <div class="form-group">
                             <label for="proxyIP">PROXYIP</label>
                             <div class="input-wrapper">
-                                <input type="text" id="proxyIP" title="PROXYIP" placeholder="proxyip.cmliussss.net"
+                                <input type="text" id="proxyIP" title="PROXYIP" placeholder="proxyip.channel404.net"
                                     onchange="processProxyIP()" oninput="processProxyIP()">
                                 <div class="checkbox-group">
-                                    <input type="checkbox" id="autoProxy" title="启用自动获取"
+                                    <input type="checkbox" id="autoProxy" title="Enable Auto Fetch"
                                         onchange="toggleAutoProxy(); markModified('proxy')">
-                                    <label for="autoProxy" class="checkbox-label">启用自动获取</label>
+                                    <label for="autoProxy" class="checkbox-label">Enable Auto Fetch</label>
                                 </div>
                             </div>
                         </div>
@@ -3491,9 +3491,9 @@ https://raw.githubusercontent.com/cmliu/WorkerVless2sub/main/addressesapi.txt"
                                     placeholder="user:password@127.0.0.1:1080" onchange="processProxyAddress('socks5')"
                                     oninput="processProxyAddress('socks5')">
                                 <div class="checkbox-group">
-                                    <input type="checkbox" id="globalSocks5" title="启用全局代理"
+                                    <input type="checkbox" id="globalSocks5" title="Enable Global Proxy"
                                         onchange="markModified('proxy')">
-                                    <label for="globalSocks5" class="checkbox-label">启用全局代理</label>
+                                    <label for="globalSocks5" class="checkbox-label">Enable Global Proxy</label>
                                 </div>
                             </div>
                         </div>
@@ -3506,9 +3506,9 @@ https://raw.githubusercontent.com/cmliu/WorkerVless2sub/main/addressesapi.txt"
                                 <input type="text" id="httpAddr" title="HTTP" placeholder="user:password@127.0.0.1:8080"
                                     onchange="processProxyAddress('http')" oninput="processProxyAddress('http')">
                                 <div class="checkbox-group">
-                                    <input type="checkbox" id="globalHTTP" title="启用全局代理"
+                                    <input type="checkbox" id="globalHTTP" title="Enable Global Proxy"
                                         onchange="markModified('proxy')">
-                                    <label for="globalHTTP" class="checkbox-label">启用全局代理</label>
+                                    <label for="globalHTTP" class="checkbox-label">Enable Global Proxy</label>
                                 </div>
                             </div>
                         </div>
@@ -3517,13 +3517,13 @@ https://raw.githubusercontent.com/cmliu/WorkerVless2sub/main/addressesapi.txt"
                     <div class="module-footer">
                         <button type="button" class="btn btn-proxyip-help" onclick="showProxyIPHelpModal()"
                             title="了解 ProxyIP 的相关信息">
-                            💡 为什么需要反代模式？PROXYIP又是什么？
+                            💡 Why do we need reverse proxy mode? What is PROXYIP?
                         </button>
                         <div class="btn-group">
                             <button type="button" class="btn btn-secondary" onclick="cancelEdit('proxy')" disabled
-                                id="cancelProxyBtn">取消</button>
+                                id="cancelProxyBtn">Cancel</button>
                             <button type="button" class="btn btn-primary" onclick="saveProxy()" disabled
-                                id="saveProxyBtn">保存</button>
+                                id="saveProxyBtn">Save</button>
                         </div>
                     </div>
                 </div>
@@ -4138,7 +4138,7 @@ https://raw.githubusercontent.com/cmliu/WorkerVless2sub/main/addressesapi.txt"
 
         function renderUI() {
             // 标题
-            document.getElementById('pageTitle').textContent = (currentConfig.优选订阅生成?.SUBNAME || 'channel404') + ' 设置页面';
+            document.getElementById('pageTitle').textContent = (currentConfig.优选订阅生成?.SUBNAME || 'channel404') + ' settings page';
 
             // 检查 CF 使用情况并显示模块
             const cfUsageModule = document.getElementById('cfUsageModule');
