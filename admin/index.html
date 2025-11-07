@@ -4138,7 +4138,9 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
 
         function renderUI() {
             // 标题
-            document.getElementById('pageTitle').textContent = (currentConfig.优选订阅生成?.SUBNAME || 'channel404') + ' settings page';
+            // document.getElementById('pageTitle').textContent = (currentConfig.优选订阅生成?.SUBNAME || 'channel404') + ' settings page';
+            
+            document.getElementById('pageTitle').textContent = ('Channel404' || 'channel404') + ' settings page';
 
             // 检查 CF 使用情况并显示模块
             const cfUsageModule = document.getElementById('cfUsageModule');
@@ -6923,7 +6925,7 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
 
                     // 更新标题显示当前使用的 API
                     if (titleElement) {
-                        titleElement.innerHTML = `<span class="status-indicator" id="status-ipip"></span>Domestic testing(${config.name})`;
+                        titleElement.innerHTML = `<span class="status-indicator" id="status-ipip"></span>Domestic Testing (${config.name})`;
                         setStatus('status-ipip', 'success'); // 重新设置状态,因为 innerHTML 会清除
                     }
 
@@ -7120,12 +7122,12 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
 
         // 将 IP 类型转换为中文并添加样式
         function formatIpType(type) {
-            if (!type) return '<span class="ip-type-unknown">未知</span>';
+            if (!type) return '<span class="ip-type-unknown">Unknown</span>';
 
             const typeMap = {
-                'isp': { text: '住宅', class: 'ip-type-residential' },
-                'hosting': { text: '机房', class: 'ip-type-hosting' },
-                'business': { text: '商用', class: 'ip-type-business' }
+                'isp': { text: 'Housing', class: 'ip-type-residential' },
+                'hosting': { text: 'Machine', class: 'ip-type-hosting' },
+                'business': { text: 'Commercial', class: 'ip-type-business' }
             };
 
             const typeInfo = typeMap[type.toLowerCase()] || { text: type, class: 'ip-type-unknown' };
@@ -7304,55 +7306,55 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
                 <div class="ip-detail-content">
                     <button class="ip-detail-close" onclick="this.closest('.ip-detail-modal').remove()">×</button>
                     <div class="ip-detail-title">
-                        🔍 IP 详细信息
-                        <span class="ip-detail-source">数据来源: ipapi.is</span>
+                        🔍 IP Detailed information
+                        <span class="ip-detail-source">Data source: ipapi.is</span>
                     </div>
             `;
 
             // 基本信息
             detailHTML += `
                 <div class="ip-detail-section">
-                    <div class="ip-detail-section-title">📍 基本信息</div>
+                    <div class="ip-detail-section-title">📍 Basic Information</div>
                     <div class="ip-detail-item">
-                        <span class="ip-detail-label">IP 地址</span>
-                        <span class="ip-detail-value">${data.ip || '未知'}</span>
+                        <span class="ip-detail-label">IP Address</span>
+                        <span class="ip-detail-value">${data.ip || 'Unknown'}</span>
                     </div>
                     <div class="ip-detail-item">
-                        <span class="ip-detail-label">区域互联网注册机构</span>
-                        <span class="ip-detail-value">${data.rir || '未知'}</span>
+                        <span class="ip-detail-label">Regional Internet Registration Authority</span>
+                        <span class="ip-detail-value">${data.rir || 'Unknown'}</span>
                     </div>
                     <div class="ip-detail-item">
-                        <span class="ip-detail-label">运营商 / ASN 类型</span>
+                        <span class="ip-detail-label">Carrier / ASN type</span>
                         <span class="ip-detail-value">${formatIpType(data.company?.type)} / ${formatIpType(data.asn?.type)}</span>
                     </div>
                     <div class="ip-detail-item">
                         <span class="ip-detail-label">
                             综合滥用评分
-                            <span class="score-help-icon" onclick="event.stopPropagation(); toggleScoreTooltip(this);" title="点击查看算法说明">?</span>
+                            <span class="score-help-icon" onclick="event.stopPropagation(); toggleScoreTooltip(this);" title="Click to view algorithm description">?</span>
                             <span class="score-tooltip">
                                 <div class="tooltip-header">
-                                    <span class="tooltip-title">📊 综合滥用评分算法</span>
+                                    <span class="tooltip-title">📊 Comprehensive abuse scoring algorithm</span>
                                 </div>
                                 <div class="tooltip-section">
-                                    <p class="tooltip-section-title">评分公式</p>
+                                    <p class="tooltip-section-title">Scoring Formula</p>
                                     <div class="formula-item">
-                                        <span class="formula-name">基础分</span>
-                                        <span class="formula-equation"><code>(运营商分 + ASN分) / 2 * 5</code></span>
+                                        <span class="formula-name">Base score</span>
+                                        <span class="formula-equation"><code>(Carrier score + ASN score) / 2 * 5</code></span>
                                     </div>
                                     <div class="formula-item">
-                                        <span class="formula-name">风险附加</span>
-                                        <span class="formula-equation"><code>风险项数量 * 15%</code></span>
+                                        <span class="formula-name">Additional Risks</span>
+                                        <span class="formula-equation"><code>Number of risk items * 15%</code></span>
                                     </div>
                                 </div>
                                 <div class="tooltip-section">
-                                    <p class="tooltip-section-title">安全风险项</p>
+                                    <p class="tooltip-section-title">Safety risk items</p>
                                     <ul class="risk-list">
-                                        <li>爬虫 (Crawler)</li>
-                                        <li>代理 (Proxy)</li>
+                                        <li>Reptile (Crawler)</li>
+                                        <li>Acting (Proxy)</li>
                                         <li>VPN</li>
-                                        <li>Tor 网络</li>
-                                        <li>滥用IP (Abuser)</li>
-                                        <li>虚假IP (Bogon)</li>
+                                        <li>Tor Network</li>
+                                        <li>IP Abuse (Abuser)</li>
+                                        <li>Fake IP (Bogon)</li>
                                     </ul>
                                 </div>
                             </span>
@@ -7365,42 +7367,42 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
             // 安全检测
             detailHTML += `
                 <div class="ip-detail-section">
-                    <div class="ip-detail-section-title">🛡️ 安全检测</div>
+                    <div class="ip-detail-section-title">🛡️ Safety inspection</div>
                     <div class="ip-detail-item">
-                        <span class="ip-detail-label">移动网络</span>
-                        <span class="ip-detail-value">${data.is_mobile ? '<span class="success-text">📱 是</span>' : '否'}</span>
+                        <span class="ip-detail-label">Mobile network</span>
+                        <span class="ip-detail-value">${data.is_mobile ? '<span class="success-text">📱 Yes</span>' : 'No'}</span>
                     </div>
                     <div class="ip-detail-item">
-                        <span class="ip-detail-label">数据中心</span>
-                        <span class="ip-detail-value">${data.is_datacenter ? '<span class="warning-text">🏢 是</span>' : '否'}</span>
+                        <span class="ip-detail-label">Data Center</span>
+                        <span class="ip-detail-value">${data.is_datacenter ? '<span class="warning-text">🏢 Yes</span>' : 'No'}</span>
                     </div>
                     <div class="ip-detail-item">
-                        <span class="ip-detail-label">卫星网络</span>
-                        <span class="ip-detail-value">${data.is_satellite ? '<span class="success-text">🛰️ 是</span>' : '否'}</span>
+                        <span class="ip-detail-label">Satellite Network</span>
+                        <span class="ip-detail-value">${data.is_satellite ? '<span class="success-text">🛰️ Yes</span>' : 'No'}</span>
                     </div>
                     <div class="ip-detail-item">
-                        <span class="ip-detail-label">爬虫</span>
-                        <span class="ip-detail-value">${data.is_crawler ? '<span class="danger-text">🤖 是</span>' : '✅ 否'}</span>
+                        <span class="ip-detail-label">Reptile</span>
+                        <span class="ip-detail-value">${data.is_crawler ? '<span class="danger-text">🤖 Yes</span>' : '✅ No'}</span>
                     </div>
                     <div class="ip-detail-item">
-                        <span class="ip-detail-label">代理服务器</span>
-                        <span class="ip-detail-value">${data.is_proxy ? '<span class="danger-text">⚠️ 是</span>' : '✅ 否'}</span>
+                        <span class="ip-detail-label">Proxy server</span>
+                        <span class="ip-detail-value">${data.is_proxy ? '<span class="danger-text">⚠️ Yes</span>' : '✅ No'}</span>
                     </div>
                     <div class="ip-detail-item">
                         <span class="ip-detail-label">VPN</span>
-                        <span class="ip-detail-value">${data.is_vpn ? '<span class="danger-text">⚠️ 是</span>' : '✅ 否'}</span>
+                        <span class="ip-detail-value">${data.is_vpn ? '<span class="danger-text">⚠️ Yes</span>' : '✅ No'}</span>
                     </div>
                     <div class="ip-detail-item">
-                        <span class="ip-detail-label">Tor 网络</span>
-                        <span class="ip-detail-value">${data.is_tor ? '<span class="danger-text">⚠️ 是</span>' : '✅ 否'}</span>
+                        <span class="ip-detail-label">Tor Network</span>
+                        <span class="ip-detail-value">${data.is_tor ? '<span class="danger-text">⚠️ Yes</span>' : '✅ No'}</span>
                     </div>
                     <div class="ip-detail-item">
-                        <span class="ip-detail-label">滥用 IP</span>
-                        <span class="ip-detail-value">${data.is_abuser ? '<span class="danger-text">⚠️ 是</span>' : '✅ 否'}</span>
+                        <span class="ip-detail-label">IP Abuse</span>
+                        <span class="ip-detail-value">${data.is_abuser ? '<span class="danger-text">⚠️ Yes</span>' : '✅ No'}</span>
                     </div>
                     <div class="ip-detail-item">
-                        <span class="ip-detail-label">虚假 IP</span>
-                        <span class="ip-detail-value">${data.is_bogon ? '<span class="danger-text">⚠️ 是</span>' : '✅ 否'}</span>
+                        <span class="ip-detail-label">Fake IP</span>
+                        <span class="ip-detail-value">${data.is_bogon ? '<span class="danger-text">⚠️ Yes</span>' : '✅ No'}</span>
                     </div>
                 </div>
             `;
@@ -7409,50 +7411,50 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
             if (data.location) {
                 detailHTML += `
                     <div class="ip-detail-section">
-                        <div class="ip-detail-section-title">🌍 位置信息</div>
+                        <div class="ip-detail-section-title">🌍 Location information</div>
                         <div class="ip-detail-item">
-                            <span class="ip-detail-label">国家</span>
-                            <span class="ip-detail-value">${data.location.country || '未知'} (${data.location.country_code || '-'})</span>
+                            <span class="ip-detail-label">Country</span>
+                            <span class="ip-detail-value">${data.location.country || 'Unknown'} (${data.location.country_code || '-'})</span>
                         </div>
                         ${data.location.state ? `
                         <div class="ip-detail-item">
-                            <span class="ip-detail-label">省份/州</span>
+                            <span class="ip-detail-label">Province/State</span>
                             <span class="ip-detail-value">${data.location.state}</span>
                         </div>
                         ` : ''}
                         ${data.location.city ? `
                         <div class="ip-detail-item">
-                            <span class="ip-detail-label">城市</span>
+                            <span class="ip-detail-label">City</span>
                             <span class="ip-detail-value">${data.location.city}</span>
                         </div>
                         ` : ''}
                         ${data.location.zip ? `
                         <div class="ip-detail-item">
-                            <span class="ip-detail-label">邮编</span>
+                            <span class="ip-detail-label">Post Code</span>
                             <span class="ip-detail-value">${data.location.zip}</span>
                         </div>
                         ` : ''}
                         ${data.location.latitude && data.location.longitude ? `
                         <div class="ip-detail-item">
-                            <span class="ip-detail-label">坐标</span>
+                            <span class="ip-detail-label">Coordinate</span>
                             <span class="ip-detail-value">${data.location.latitude}, ${data.location.longitude}</span>
                         </div>
                         ` : ''}
                         ${data.location.timezone ? `
                         <div class="ip-detail-item">
-                            <span class="ip-detail-label">时区</span>
+                            <span class="ip-detail-label">Time Zone</span>
                             <span class="ip-detail-value">${data.location.timezone}</span>
                         </div>
                         ` : ''}
                         ${data.location.local_time ? `
                         <div class="ip-detail-item">
-                            <span class="ip-detail-label">当地时间</span>
+                            <span class="ip-detail-label">Local Time</span>
                             <span class="ip-detail-value">${data.location.local_time}</span>
                         </div>
                         ` : ''}
                         <div class="ip-detail-item">
-                            <span class="ip-detail-label">欧盟成员</span>
-                            <span class="ip-detail-value">${boolToEmoji(data.location.is_eu_member, '🇪🇺 是', '否')}</span>
+                            <span class="ip-detail-label">EU</span>
+                            <span class="ip-detail-value">${boolToEmoji(data.location.is_eu_member, '🇪🇺 Yes', 'No')}</span>
                         </div>
                     </div>
                 `;
@@ -7460,34 +7462,34 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
 
             // 运营商信息
             if (data.company) {
-                const abuserScore = data.company.abuser_score || '未知';
+                const abuserScore = data.company.abuser_score || 'Unknown';
                 const badgeClass = getThreatBadgeClass(abuserScore);
 
                 detailHTML += `
                     <div class="ip-detail-section">
-                        <div class="ip-detail-section-title">🏢 运营商信息</div>
+                        <div class="ip-detail-section-title">🏢 Operator Information</div>
                         <div class="ip-detail-item">
-                            <span class="ip-detail-label">运营商名称</span>
-                            <span class="ip-detail-value">${data.company.name || '未知'}</span>
+                            <span class="ip-detail-label">Operator Name</span>
+                            <span class="ip-detail-value">${data.company.name || 'Unknown'}</span>
                         </div>
                         ${data.company.domain ? `
                         <div class="ip-detail-item">
-                            <span class="ip-detail-label">域名</span>
+                            <span class="ip-detail-label">Domain Name</span>
                             <span class="ip-detail-value">${data.company.domain}</span>
                         </div>
                         ` : ''}
                         <div class="ip-detail-item">
-                            <span class="ip-detail-label">类型</span>
-                            <span class="ip-detail-value">${data.company.type || '未知'}</span>
+                            <span class="ip-detail-label">Type</span>
+                            <span class="ip-detail-value">${data.company.type || 'Unknown'}</span>
                         </div>
                         ${data.company.network ? `
                         <div class="ip-detail-item">
-                            <span class="ip-detail-label">网络范围</span>
+                            <span class="ip-detail-label">Network Range</span>
                             <span class="ip-detail-value">${data.company.network}</span>
                         </div>
                         ` : ''}
                         <div class="ip-detail-item">
-                            <span class="ip-detail-label">滥用评分</span>
+                            <span class="ip-detail-label">Abuse Rating</span>
                             <span class="ip-detail-value"><span class="ip-detail-badge ${badgeClass}">${abuserScore}</span></span>
                         </div>
                     </div>
@@ -7501,36 +7503,36 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
 
                 detailHTML += `
                     <div class="ip-detail-section">
-                        <div class="ip-detail-section-title">🔢 ASN 信息</div>
+                        <div class="ip-detail-section-title">🔢 ASN Information</div>
                         <div class="ip-detail-item">
-                            <span class="ip-detail-label">ASN 编号</span>
-                            <span class="ip-detail-value">AS${data.asn.asn || '未知'}</span>
+                            <span class="ip-detail-label">ASN Number</span>
+                            <span class="ip-detail-value">AS${data.asn.asn || 'Unknown'}</span>
                         </div>
                         ${data.asn.org ? `
                         <div class="ip-detail-item">
-                            <span class="ip-detail-label">组织</span>
+                            <span class="ip-detail-label">Organize</span>
                             <span class="ip-detail-value">${data.asn.org}</span>
                         </div>
                         ` : ''}
                         ${data.asn.route ? `
                         <div class="ip-detail-item">
-                            <span class="ip-detail-label">路由</span>
+                            <span class="ip-detail-label">Routing</span>
                             <span class="ip-detail-value">${data.asn.route}</span>
                         </div>
                         ` : ''}
                         ${data.asn.type ? `
                         <div class="ip-detail-item">
-                            <span class="ip-detail-label">类型</span>
+                            <span class="ip-detail-label">Type</span>
                             <span class="ip-detail-value">${data.asn.type}</span>
                         </div>
                         ` : ''}
                         <div class="ip-detail-item">
-                            <span class="ip-detail-label">滥用评分</span>
+                            <span class="ip-detail-label">Abuse Rating</span>
                             <span class="ip-detail-value"><span class="ip-detail-badge ${asnBadgeClass}">${asnAbuserScore}</span></span>
                         </div>
                         ${data.asn.country ? `
                         <div class="ip-detail-item">
-                            <span class="ip-detail-label">国家代码</span>
+                            <span class="ip-detail-label">Country Code</span>
                             <span class="ip-detail-value">${data.asn.country.toUpperCase()}</span>
                         </div>
                         ` : ''}
