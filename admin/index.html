@@ -4132,7 +4132,7 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
                 // 设置网页标题
                 document.title = `${currentConfig.优选订阅生成?.SUBNAME || 'channel404'} 设置页面 - 管理后台`;
             } catch (error) {
-                showToast('加载配置失败: ' + error.message, 'error');
+                showToast('Configuration loading failed: ' + error.message, 'error');
             }
         }
 
@@ -4140,7 +4140,7 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
             // 标题
             // document.getElementById('pageTitle').textContent = (currentConfig.优选订阅生成?.SUBNAME || 'channel404') + ' settings page';
             
-            document.getElementById('pageTitle').textContent = ('Channel404' || 'channel404') + ' settings page';
+            document.getElementById('pageTitle').textContent = ('Channel404' || 'channel404') + ' Settings Page';
 
             // 检查 CF 使用情况并显示模块
             const cfUsageModule = document.getElementById('cfUsageModule');
@@ -4291,7 +4291,7 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
                     textarea.value = '';
                 }
             } catch (error) {
-                showToast('加载自定义IP失败', 'error');
+                showToast('Failed to load custom IP', 'error');
                 textarea.value = '';
             } finally {
                 textarea.disabled = false;
@@ -4716,19 +4716,19 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
             if (mode === 'random') {
                 const randomCount = document.getElementById('randomCount').value.trim();
                 if (!randomCount) {
-                    showToast('随机优选数量不能为空', 'error');
+                    showToast('The number of random selections cannot be empty.', 'error');
                     return;
                 }
             } else if (mode === 'custom') {
                 const customIPs = document.getElementById('customIPs').value.trim();
                 if (!customIPs) {
-                    showToast('自定义优选地址不能为空', 'error');
+                    showToast('Custom preferred address cannot be empty', 'error');
                     return;
                 }
             } else if (mode === 'generator') {
                 const generatorURL = document.getElementById('generatorURL').value.trim();
                 if (!generatorURL) {
-                    showToast('优选订阅生成器地址不能为空', 'error');
+                    showToast('The preferred subscription generator address cannot be empty.', 'error');
                     return;
                 }
             }
@@ -4749,7 +4749,7 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
                 try {
                     await fetch('/admin/ADD.txt', { method: 'POST', body: customIPs });
                 } catch (error) {
-                    showToast('保存自定义IP失败', 'error');
+                    showToast('Failed to save custom IP', 'error');
                     return;
                 }
             }
@@ -4782,7 +4782,7 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
                 proxyIP = autoProxy ? 'auto' : document.getElementById('proxyIP').value.trim();
 
                 if (!autoProxy && !proxyIP) {
-                    showToast('PROXYIP地址不能为空', 'error');
+                    showToast('PROXYIP address cannot be empty.', 'error');
                     return;
                 }
             } else if (mode === 'socks5') {
@@ -4791,7 +4791,7 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
                 globalProxy = document.getElementById('globalSocks5').checked;
 
                 if (!socksAccount) {
-                    showToast('SOCKS5地址不能为空', 'error');
+                    showToast('SOCKS5 address cannot be empty.', 'error');
                     return;
                 }
             } else if (mode === 'http') {
@@ -4800,7 +4800,7 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
                 globalProxy = document.getElementById('globalHTTP').checked;
 
                 if (!socksAccount) {
-                    showToast('HTTP地址不能为空', 'error');
+                    showToast('HTTP address cannot be empty.', 'error');
                     return;
                 }
             }
@@ -4842,11 +4842,11 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
                 });
 
                 if (!response.ok) throw new Error('保存失败');
-                showToast('配置已保存', 'success');
+                showToast('Configuration saved', 'success');
                 modifiedSections.delete(section);
                 updateButtonStates();
             } catch (error) {
-                showToast('保存失败: ' + error.message, 'error');
+                showToast('Save failed: ' + error.message, 'error');
             }
         }
 
@@ -5422,18 +5422,18 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
 
             // 检查按钮是否禁用（必须先通过验证）
             if (confirmBtn.disabled) {
-                showToast('请先点击"可用性验证"按钮验证配置', 'error');
+                showToast('Please click the "Availability Verification" button to verify the configuration first', 'error');
                 return;
             }
 
             if (!token || !chatID) {
-                showToast('请填写完整的Bot Token和Chat ID', 'error');
+                showToast('Please fill in the complete Bot Token and Chat ID', 'error');
                 return;
             }
 
             try {
                 confirmBtn.disabled = true;
-                confirmBtn.textContent = '保存中...';
+                confirmBtn.textContent = 'Saving...';
 
                 // 提交到后端
                 const response = await fetch('/admin/tg.json', {
@@ -5449,7 +5449,7 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
 
                 if (response.ok) {
                     const result = await response.json();
-                    showToast('✅ TelegramBot 配置已保存', 'success');
+                    showToast('✅ TelegramBot configuration has been saved', 'success');
                     closeTelegramConfigModal();
 
                     // 1秒后刷新页面
@@ -5458,14 +5458,14 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
                     }, 1000);
                 } else {
                     const errorData = await response.json();
-                    showToast('❌ 保存失败: ' + (errorData.error || '未知错误'), 'error');
+                    showToast('❌ Save failed: ' + (errorData.error || '未知错误'), 'error');
                     confirmBtn.disabled = false;
-                    confirmBtn.textContent = '保存';
+                    confirmBtn.textContent = 'Keep';
                 }
             } catch (error) {
-                showToast('❌ 保存失败: ' + error.message, 'error');
+                showToast('❌ Save failed: ' + error.message, 'error');
                 confirmBtn.disabled = false;
-                confirmBtn.textContent = '保存';
+                confirmBtn.textContent = 'Keep';
             }
         }
 
@@ -5674,7 +5674,7 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
                     }, 1000);
                 } else {
                     const errorData = await response.json();
-                    showToast('❌ Save failed: ' + (errorData.error || '未知错误'), 'error');
+                    showToast('❌ Save failed: ' + (errorData.error || 'Unknown error'), 'error');
                     confirmBtn.disabled = false;
                     confirmBtn.textContent = 'Keep';
                 }
@@ -5773,7 +5773,7 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
                         location.reload();
                     }, 1000);
                 } else {
-                    showToast('❌ Cleanup failed: ' + (data.message || '未知错误'), 'error');
+                    showToast('❌ Cleanup failed: ' + (data.message || 'Unknown error'), 'error');
                 }
             } catch (error) {
                 showToast('❌ Clear errors: ' + error.message, 'error');
@@ -6296,7 +6296,7 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
 
                 if (ips.length === 0) {
                     console.error('[在线优选] 错误: 未能获取到IP列表');
-                    showToast('未能获取到IP列表', 'error');
+                    showToast('Unable to obtain IP list', 'error');
                     return;
                 }
 
@@ -6316,14 +6316,14 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
                 displayResults();
 
                 console.log('[在线优选] ========== 优选流程完成 ==========');
-                showToast('优选完成！', 'success');
+                showToast('Optimization complete!', 'success');
 
             } catch (error) {
                 console.error('[在线优选] 优选过程出错:', error);
-                showToast('优选过程出错: ' + error.message, 'error');
+                showToast('Error occurred during the optimization process: ' + error.message, 'error');
             } finally {
                 btnStart.disabled = false;
-                btnStart.textContent = '开始优选';
+                btnStart.textContent = 'Start Selection';
             }
         }
 
@@ -6786,7 +6786,7 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
             if (!showAll && results.length > 16) {
                 finalHtml += `<div style="margin-top: 15px; text-align: center;">
                     <button type="button" class="btn btn-secondary" onclick="showCountryResults('${country}', true)" style="padding: 8px 16px; font-size: 12px;">
-                        📂 展开所有IP (${results.length} 个)
+                        📂 Expand all IPs (${results.length} 个)
                     </button>
                 </div>`;
             }
@@ -6800,7 +6800,7 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
 
             if (!currentSelectedCountry || !optimizeResults[currentSelectedCountry]) {
                 console.warn('[在线优选] 未选择国家或无结果数据');
-                showToast('请先选择一个国家', 'error');
+                showToast('Please select a country first', 'error');
                 return;
             }
 
@@ -6816,12 +6816,12 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
             if (mode === 'override') {
                 textarea.value = newContent;
                 console.log('[在线优选] 覆盖保存完成');
-                showToast('已覆盖到自定义优选地址 (前16个)', 'success');
+                showToast('Custom preferred addresses (first 16) have been covered.', 'success');
             } else if (mode === 'append') {
                 const currentValue = textarea.value.trim();
                 textarea.value = currentValue ? currentValue + '\n' + newContent : newContent;
                 console.log('[在线优选] 追加保存完成');
-                showToast('已追加到自定义优选地址 (前16个)', 'success');
+                showToast('Added to the custom preferred addresses (first 16)', 'success');
             }
 
             // 标记为已修改
