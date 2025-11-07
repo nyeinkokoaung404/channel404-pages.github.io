@@ -4060,9 +4060,9 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
                         Therefore, the location of your IP address when accessing the internet depends on the type of website you are visiting：
                     </p>
                     <ul style="margin: 12px 0; padding-left: 20px; line-height: 1.8;">
-                        <li style="margin-bottom: 12px; color: var(--text-secondary);">👤 Visit<strong>Non-Cloudflare CDN
+                        <li style="margin-bottom: 12px; color: var(--text-secondary);">👤 Visit <strong>Non-Cloudflare CDN
                                 Site</strong>（such as <b>YouTube、Google, </b>etc），Your IP address's location is determined by the「Preferred IP」</li>
-                        <li style="color: var(--text-secondary);">🌐 Visit<strong>Website hosted by Cloudflare CDN</strong>（such as <b>Twitter、ChatGP, </b>etc），Your IP
+                        <li style="color: var(--text-secondary);">🌐 Visit <strong>Website hosted by Cloudflare CDN</strong>（such as <b>Twitter、ChatGP, </b>etc），Your IP
                             address's location is determined by「ProxyIP/SOCKS5/HTTP」</li>
                     </ul>
                 </div>
@@ -7287,17 +7287,17 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
 
                 // 根据百分比确定风险等级文本
                 let riskLevel = '';
-                if (scorePercentage >= 100) riskLevel = '极度危险';
-                else if (scorePercentage >= 20) riskLevel = '高风险';
-                else if (scorePercentage >= 5) riskLevel = '轻微风险';
-                else if (scorePercentage >= 0.25) riskLevel = '纯净';
-                else riskLevel = '极度纯净';
+                if (scorePercentage >= 100) riskLevel = 'Extremely dangerous';
+                else if (scorePercentage >= 20) riskLevel = 'High risk';
+                else if (scorePercentage >= 5) riskLevel = 'Minor risk';
+                else if (scorePercentage >= 0.25) riskLevel = 'Pure';
+                else riskLevel = 'Extremely pure';
 
                 riskControlHTML = `
                     <span class="ip-detail-badge ${badgeClass}">${formattedScore} ${riskLevel}</span>
                 `;
             } else {
-                riskControlHTML = '未知';
+                riskControlHTML = 'Unknown';
             }
 
             // 构建详情内容
@@ -7328,7 +7328,7 @@ https://raw.githubusercontent.com/nyeinkokoaung404/WorkerVless2sub/main/addresse
                     </div>
                     <div class="ip-detail-item">
                         <span class="ip-detail-label">
-                            综合滥用评分
+                            Comprehensive abuse score
                             <span class="score-help-icon" onclick="event.stopPropagation(); toggleScoreTooltip(this);" title="Click to view algorithm description">?</span>
                             <span class="score-tooltip">
                                 <div class="tooltip-header">
